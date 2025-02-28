@@ -5,7 +5,7 @@ import { AxeResults } from 'axe-core';
 
 let violations: AxeResults['violations'];
 
-test.beforeEach(async ({page}) => {
+test.beforeEach(async ({page}, testInfo) => {
   await page.goto('https://www.playwright.dev');
   const results = await new AxeBuilder({page}).withTags(["wcga2a", "wcga2aa"]).withRules([ 'accesskeys',
     'area-alt',
@@ -50,10 +50,10 @@ test.beforeEach(async ({page}) => {
     'td-has-header',
 ]).analyze();
   violations = results.violations;
-  console.log(violations);
+  await testInfo.attach('a11y-results.json',{body : JSON.stringify(violations, null, 2) , contentType:  'application/json'});
 });
 
-test('Accessibility test - fail if any violations are found', async ({page}) => {
+test('Accessibility test - fail if any violations are found', async ({page} , testInfo) => {
   expect(violations.length).toBe(0);   
 });
 
