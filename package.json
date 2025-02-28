@@ -15,6 +15,7 @@
   },
   "homepage": "https://github.com/JohnRudden/Playwright_Accessibility_Testing#readme",
   "dependencies": {
+    "@axe-core/playwright": "^4.10.1",
     "playwright": "^1.50.1"
   },
   "devDependencies": {
